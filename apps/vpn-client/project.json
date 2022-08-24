@@ -1,0 +1,77 @@
+{
+  "sourceRoot": "apps/vpn-client/src",
+  "projectType": "application",
+  "targets": {
+    "build": {
+      "executor": "nx-electron:build",
+      "outputs": [
+        "{options.outputPath}"
+      ],
+      "options": {
+        "outputPath": "dist/apps/vpn-client",
+        "main": "apps/vpn-client/src/main.ts",
+        "tsConfig": "apps/vpn-client/tsconfig.app.json",
+        "assets": [
+          "apps/vpn-client/src/assets"
+        ]
+      },
+      "configurations": {
+        "production": {
+          "optimization": true,
+          "extractLicenses": true,
+          "inspect": false,
+          "fileReplacements": [
+            {
+              "replace": "apps/vpn-client/src/environments/environment.ts",
+              "with": "apps/vpn-client/src/environments/environment.prod.ts"
+            }
+          ]
+        }
+      }
+    },
+    "serve": {
+      "executor": "nx-electron:execute",
+      "options": {
+        "buildTarget": "vpn-client:build"
+      }
+    },
+    "package": {
+      "executor": "nx-electron:package",
+      "options": {
+        "name": "vpn-client",
+        "frontendProject": "vpn-client",
+        "outputPath": "dist/packages",
+        "prepackageOnly": true
+      }
+    },
+    "make": {
+      "executor": "nx-electron:make",
+      "options": {
+        "name": "vpn-client",
+        "frontendProject": "vpn-client",
+        "outputPath": "dist/executables"
+      }
+    },
+    "lint": {
+      "executor": "@nrwl/linter:eslint",
+      "outputs": [
+        "{options.outputFile}"
+      ],
+      "options": {
+        "lintFilePatterns": [
+          "apps/vpn-client/**/*.ts"
+        ]
+      }
+    },
+    "test": {
+      "executor": "@nrwl/jest:jest",
+      "outputs": [
+        "coverage/apps/vpn-client"
+      ],
+      "options": {
+        "jestConfig": "apps/vpn-client/jest.config.js",
+        "passWithNoTests": true
+      }
+    }
+  }
+}

@@ -1,5 +1,9 @@
 {
   "$schema": "./node_modules/nx/schemas/workspace-schema.json",
   "version": 2,
-  "projects": {}
+  "projects": {
+    "vpn-client": "apps/vpn-client",
+    "vpn-ui": "apps/vpn-ui",
+    "vpn-ui-e2e": "apps/vpn-ui-e2e"
+  }
 }
